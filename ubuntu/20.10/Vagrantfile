@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
     h.vmname = "photon.ai"
     h.cpus = 4
     h.maxmemory = 9216
-    h.differencing_disk = true
+    h.linked_clone = true
     h.enable_virtualization_extensions = true
     # h.vm_integration_services = {
     #   guest_service_interface: true,
@@ -15,13 +15,7 @@ Vagrant.configure("2") do |config|
 
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
-
   config.vm.provision "shell", inline: <<-SHELL
-    echo 'admin' | passwd --stdin root
+    echo 'vagrant:admin' | chpasswd
   SHELL
-
 end
